@@ -12,7 +12,6 @@ username_mapping = {u.username: u for u in users}
 
 def authenticate(username, password):
     user = username_mapping.get(username, None)
-    import pdb; pdb.set_trace()
     if user and safe_str_cmp(user.password, password):
         return user
 
