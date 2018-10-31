@@ -1,10 +1,11 @@
-from flask import Flask, request
+from flask import Flask
 import sys
-sys.path.append('/Users/hosseins/Developer/programming_practice/flask_app/venv/lib/python3.6/site-packages')
+sys.path.append('/Users/hosseins/Developer/my_projects/udemy-api/venv/lib/python3.6/site-packages')
 from flask_restful import Api, Resource, reqparse
 from flask_jwt import JWT, jwt_required
 
 from security import authenticate, identity
+from user import UserRegister
 
 app = Flask(__name__)
 api = Api(app)
@@ -34,7 +35,7 @@ class Item(Resource):
         """
         Test:
         curl localhost:5000/item/piano \
-            -H "Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDA3NzQ0MjEsImlhdCI6MTU0MDc3NDEyMSwibmJmIjoxNTQwNzc0MTIxLCJpZGVudGl0eSI6MX0.eDXrAsljEgHw912gsD_eFXTxbB2SNYAAjtoRWhTQMcc"
+            -H "Authorization: JWT eyJ0eX...oRWhTQMcc"
         """
         item = next(filter(lambda x: x['name'] == name, items), None)
         return item
@@ -85,5 +86,6 @@ class Items(Resource):
 
 api.add_resource(Item, '/item/<string:name>')
 api.add_resource(Items, '/items')
+api.add_resource(UserRegister, '/register')
 
 app.run(debug=True)

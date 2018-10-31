@@ -1,0 +1,10 @@
+version: "3.0"
+
+services:
+  udemi-api:
+    build:
+      - context: ../
+      - dockerfile: devstack/Dockerfile
+    image: udemi-api
+    ports:
+      - "5000:5000"
