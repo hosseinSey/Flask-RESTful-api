@@ -14,7 +14,7 @@ jwt = JWT(app, authenticate, identity)  # /auth
 """
 curl localhost:5000/auth \
    -H "Content-Type: application/json" \
-   -d '{"username":"bob", "password":"asdf"}'
+   -d '{"username":"hossein", "password":"pass"}'
 """
 
 items = []
@@ -34,7 +34,7 @@ class Item(Resource):
         """
         Test:
         curl localhost:5000/item/piano \
-            -H "Authorization: JWT eyJ0eXAiOi...J2H4XfdxE"
+            -H "Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDA3NzQ0MjEsImlhdCI6MTU0MDc3NDEyMSwibmJmIjoxNTQwNzc0MTIxLCJpZGVudGl0eSI6MX0.eDXrAsljEgHw912gsD_eFXTxbB2SNYAAjtoRWhTQMcc"
         """
         item = next(filter(lambda x: x['name'] == name, items), None)
         return item
