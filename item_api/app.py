@@ -18,7 +18,12 @@ curl localhost:5000/auth \
    -d '{"username":"hossein", "password":"pass"}'
 """
 
-items = []
+items = [
+    {
+        "name": "piano",
+        "price": "12"
+    }
+]
 
 
 class Item(Resource):
@@ -81,11 +86,17 @@ class Item(Resource):
 
 class Items(Resource):
     def get(self):
+        print("hit here...")
         return {"items": items}
+
+
+@app.route('/ping')
+def ping():
+    return "pong\n"
 
 
 api.add_resource(Item, '/item/<string:name>')
 api.add_resource(Items, '/items')
 api.add_resource(UserRegister, '/register')
 
-app.run(debug=True)
+app.run(host='0.0.0.0', port=5000, debug=True)

@@ -5,6 +5,6 @@ WORKDIR /code
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-ADD /code .
+ADD . /code
 
-CMD python app.py
+CMD python item_api/app.py

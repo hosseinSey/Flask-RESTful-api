@@ -1,10 +1,12 @@
 version: "3.0"
 
 services:
-  udemi-api:
+  udemiapi:
     build:
-      - context: ../
-      - dockerfile: devstack/Dockerfile
-    image: udemi-api
+      context: ..
+      dockerfile: devstack/Dockerfile
+    image: udemiapi
+    volumes:
+      - ..:/code
     ports:
       - "5000:5000"

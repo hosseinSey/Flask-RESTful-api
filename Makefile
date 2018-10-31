@@ -19,13 +19,13 @@ init: ## Build the development docker container
 run-dev: ## Run a local development server
 	docker-compose \
 		-f devstack/docker-compose.yaml \
-		run --service-ports udemi-api
+		up
 
-.PHONY: run-dev-shell
-run-dev-shell: ## Run the bash command inside the docker
+.PHONY: run-shell
+run-shell: ## Run the bash command inside the docker
 	docker-compose \
 		-f devstack/docker-compose.yaml \
-		run --service-ports activitysvc \
+		run --service-ports udemiapi \
 		bash
 
 .PHONY: test-unit
