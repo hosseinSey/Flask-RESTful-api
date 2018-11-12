@@ -7,4 +7,4 @@ RUN pip install -r requirements.txt
 
 ADD . /code
 
-CMD python item_api/app.py
+CMD python web_engine/app.py

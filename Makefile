@@ -9,24 +9,23 @@ help: ## Print this help message and exit
 			printf "  %-30s %s\n", $$1, $$NF \
 		 }' $(MAKEFILE_LIST)
 
-.PHONY: init
-init: ## Build the development docker container
+.PHONY: build
+build: ## Build the development docker container
 	docker-compose \
 		-f devstack/docker-compose.yaml \
 		build
 
-.PHONY: run-dev
-run-dev: ## Run a local development server
+.PHONY: up
+up: ## Run a local development server
 	docker-compose \
 		-f devstack/docker-compose.yaml \
 		up
 
-.PHONY: run-shell
-run-shell: ## Run the bash command inside the docker
+.PHONY: run
+run: ## Run the bash command inside the docker
 	docker-compose \
 		-f devstack/docker-compose.yaml \
-		run --service-ports udemiapi \
-		bash
+		run --service-ports udemiapi
 
 .PHONY: test-unit
 test-unit: ## Run unit tests

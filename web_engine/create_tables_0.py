@@ -26,8 +26,6 @@ query_select_all = """
 """
 users = list(cursor.execute(query_select_all))
 
+
 connection.commit()
 connection.close()
-
-for u in users:
-    print(u)
