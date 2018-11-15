@@ -25,7 +25,7 @@ up: ## Run a local development server
 run: ## Run the bash command inside the docker
 	docker-compose \
 		-f devstack/docker-compose.yaml \
-		run --service-ports udemiapi
+		run --service-ports udemiapi 
 
 .PHONY: test-unit
 test-unit: ## Run unit tests
