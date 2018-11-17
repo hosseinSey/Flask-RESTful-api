@@ -40,3 +40,21 @@ class UserModel:
 
         connection.close()
         return user
+
+    @classmethod
+    def insert(cls, item):
+        connection = sqlite3.connect('data.db')
+        cursor = connection.cursor()
+        query = "INSERT INTO items VALUES (?, ?)"
+        cursor.execute(query, (item['name'], item["price"]))
+        connection.commit()
+        connection.close()
+
+    @classmethod
+    def update(cls, item):
+        connection = sqlite3.connect('data.db')
+        cursor = connection.cursor()
+        query = "UPDATE items SET price=? WHERE name=?"
+        cursor.execute(query, (item['price'], item["name"]))
+        connection.commit()
+        connection.close()

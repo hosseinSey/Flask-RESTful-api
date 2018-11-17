@@ -57,7 +57,7 @@ curl \
     localhost:5000/auth \
     -X POST \
     -H "Content-Type: application/json" \
-    -d '{"username": "Ali", "password": "qwerty"}'
+    -d '{"username": "ali", "password": "asdf"}'
 """
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

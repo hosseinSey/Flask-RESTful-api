@@ -15,7 +15,7 @@ user = (1, 'hossein', 'pass')
 cursor.execute(query_insert_user, user)
 
 users = [
-    (2, 'ali', 'asdf'),
+    (2, 'Ali', 'asdf'),
     (3, 'hassan', 'qwer')
 ]
 cursor.executemany(query_insert_user, users)
