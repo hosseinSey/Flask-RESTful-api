@@ -8,7 +8,7 @@ from resources.item import Item, Items
 
 app = Flask(__name__)
 api = Api(app)
-
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = "a_secret"
 jwt = JWT(app, authenticate, identity)  # /auth
 """
@@ -26,13 +26,13 @@ def ping():
 api.add_resource(Item, '/item/<string:name>')
 """
 curl \
-    -H "Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDE5NzI2ODAsImlhdCI6MTU0MTk3MjM4MCwibmJmIjoxNTQxOTcyMzgwLCJpZGVudGl0eSI6MX0.928O_sNvWQaO1WU7uxcqINkP_jb5oAlLUmaGvM5W-2M" \
+    -H "Authorization: JWT eyJ0eX...6CYqIgC90MI" \
     localhost:5000/item/test
 
-curl localhost:5000/item/book \
+curl localhost:5000/item/piano \
     -X POST \
     -H "Content-Type: application/json" \
-    -d '{"price":"20"}'
+    -d '{"price":"15"}'
 
 curl localhost:5000/item/book \
     -X PUT \
@@ -48,7 +48,7 @@ curl \
     localhost:5000/register \
     -X POST \
     -H "Content-Type: application/json" \
-    -d '{"username": "Ali", "password": "qwerty"}'
+    -d '{"username": "Habib", "password": "Habib"}'
 """
 
 # POST /auth

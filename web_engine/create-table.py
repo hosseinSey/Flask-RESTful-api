@@ -5,8 +5,8 @@ connection = sqlite3.connect('data.db')
 cursor = connection.cursor()
 
 query_create_table = """
-        CREATE TABLE users
-        (id int, username text, password text)
+        CREATE TABLE IF NOT EXISTS users
+        (id INTEGER PRIMARY KEY, username text, password text)
 """
 cursor.execute(query_create_table)
 
@@ -26,6 +26,11 @@ users = list(cursor.execute(query_select))
 for u in users:
     print(u)
 
+query = """
+    CREATE TABLE IF NOT EXISTS items
+    (id INTEGER PRAIMARY KEY, name text, price real)
+"""
+cursor.execute(query)
 
 connection.commit()
 connection.close()
