@@ -19,6 +19,11 @@ curl localhost:5000/auth \
 """
 
 
+@app.before_first_request
+def create_tables():
+    db.create_all()
+
+
 @app.route('/ping')
 def ping():
     return "pong\n"
