@@ -28,7 +28,7 @@ for u in users:
 
 query = """
     CREATE TABLE IF NOT EXISTS items
-    (id INTEGER PRAIMARY KEY, name text, price real)
+    (id INTEGER PRIMARY KEY, name text, price real)
 """
 cursor.execute(query)
 

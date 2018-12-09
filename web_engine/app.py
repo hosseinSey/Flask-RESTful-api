@@ -7,9 +7,10 @@ from resources.user import UserRegister
 from resources.item import Item, Items
 
 app = Flask(__name__)
-api = Api(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = "a_secret"
+api = Api(app)
 jwt = JWT(app, authenticate, identity)  # /auth
 """
 curl localhost:5000/auth \
@@ -29,7 +30,7 @@ curl \
     -H "Authorization: JWT eyJ0eX...6CYqIgC90MI" \
     localhost:5000/item/test
 
-curl localhost:5000/item/piano \
+curl localhost:5000/item/book \
     -X POST \
     -H "Content-Type: application/json" \
     -d '{"price":"15"}'
@@ -48,7 +49,7 @@ curl \
     localhost:5000/register \
     -X POST \
     -H "Content-Type: application/json" \
-    -d '{"username": "Habib", "password": "Habib"}'
+    -d '{"username": "alibaba", "password": "alibaba"}'
 """
 
 # POST /auth
@@ -57,7 +58,9 @@ curl \
     localhost:5000/auth \
     -X POST \
     -H "Content-Type: application/json" \
-    -d '{"username": "ali", "password": "asdf"}'
+    -d '{"username": "alibaba", "password": "alibaba"}'
 """
 if __name__ == '__main__':
+    from db import db
+    db.init_app(app)
     app.run(host='0.0.0.0', port=5000, debug=True)

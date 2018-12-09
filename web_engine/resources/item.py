@@ -30,7 +30,7 @@ class Item(Resource):
         item = ItemModel(name, data["price"])
 
         try:
-            item.insert()
+            item.save_to_db()
         except Exception:
             return {"message": "An error occurred during item insertion."}, 500
         return item.json(), 201
@@ -38,37 +38,20 @@ class Item(Resource):
     def put(self, name):
         data = self.parser.parse_args()
         item = ItemModel.find_by_name(name)
-        updated_item = ItemModel(name, data["price"])
         if item is None:
-            try:
-                updated_item.insert(updated_item)
-            except Exception:
-                return {"message": "An error occured!"}, 500
+            item = ItemModel(name, data['price'])
         else:
-            try:
-                updated_item.update()
-            except Exception:
-                return {"message": "An error occured!"}, 500
-        return {"message": f"Item {name} updated."}, 200
+            item.price = data['price']
+        item.save_to_db()
+        return item.json(), 200
 
     def delete(self, name):
-        connection = sqlite3.connect('data.db')
-        cursor = connection.cursor()
-        query = "DELETE FROM items WHERE name=?"
-        cursor.execute(query, (name,))
-        connection.commit()
-        connection.close()
+        item = ItemModel.find_by_name(name)
+        if item:
+            ItemModel.delete_from_db()
         return {"message": f"Item {name} deleted."}
 
 
 class Items(Resource):
     def get(self):
-        connection = sqlite3.connect('data.db')
-        cursor = connection.cursor()
-        query = "SELECT * FROM items"
-        results = list(cursor.execute(query))
-        items = []
-        for r in results:
-            items.append({"name": r[0], "price": r[1]})
-        connection.close()
-        return {"items": items}
+        return {"items": [item.json() for item in ItemModel.query.all()]}
