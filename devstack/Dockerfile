@@ -7,4 +7,6 @@ RUN pip install -r requirements.txt
 
 ADD . /code
 
-CMD python web_engine/app.py
+WORKDIR /code/web_engine
+
+CMD python app.py

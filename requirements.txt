@@ -2,3 +2,5 @@ flask
 Flask-RESTful
 Flask-JWT
 pysqlite3
+Flask-SQLAlchemy==2.3.2
+flask-log-request-id
